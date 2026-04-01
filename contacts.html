@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta
+      name="description"
+      content="Контакты Диалог Авто в Альметьевске. Адреса, телефоны, часы работы. Три центра: ул. Геофизическая, 58, 18 и 3."
+    />
+    <title>Диалог Авто | Контакты</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <h1>Диалог Авто</h1>
+            <span>19 лет лидерства в Альметьевске</span>
+          </div>
+          <button class="burger-menu" id="burgerMenu" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="nav-links" id="navLinks">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог авто</a>
+            <a href="service.html">Сервис</a>
+            <a href="contacts.html" class="active">Контакты</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="section-title">Контакты и наши центры в Альметьевске</div>
+
+      <div
+        style="
+          display: flex;
+          gap: 28px;
+          flex-wrap: wrap;
+          margin-bottom: 20px;
+          padding: 20px;
+          background: white;
+          border-radius: 24px;
+        "
+      >
+        <div><i class="fab fa-whatsapp"></i> WhatsApp: +7 (855) 342-53-00</div>
+        <div><i class="fab fa-telegram"></i> Telegram: @dialogauto</div>
+        <div><i class="fas fa-envelope"></i> Email: dialog@auto.ru</div>
+        <div><i class="fas fa-phone-alt"></i> Телефон: 8-800-555-35-35</div>
+      </div>
+
+      <div id="map"></div>
+
+      <div class="contacts-list-vertical" id="contactsPoints"></div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          © 2026 Диалог Авто — 19 лет лидерства. Продажа, сервис, выкуп авто в
+          Альметьевске.
+        </p>
+        <p style="margin-top: 12px">
+          г. Альметьевск, ул. Геофизическая 58, 18, 3
+        </p>
+      </div>
+    </footer>
+
+    <div id="phoneModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModals()">&times;</span>
+        <h2>Оставить заявку</h2>
+        <div class="modal-description">
+          Оставьте ваш номер телефона, и наш специалист свяжется с вами в
+          течение 15 минут для консультации.
+        </div>
+        <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__" />
+        <button
+          id="submitPhoneBtn"
+          style="margin-top: 16px; width: 100%; background: #dc2626"
+        >
+          Отправить заявку
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const cityPoints = [
+        {
+          name: "Автоцентр на Геофизической, 58",
+          address: "ул. Геофизическая, 58",
+          phone: "+7 (855) 342-53-24",
+          rating: 4.8,
+          hours: "Пн-Вс: 9:00-21:00",
+          image: "img/autocenter1.webp",
+        },
+        {
+          name: "Сервисный центр Геофизическая, 18",
+          address: "ул. Геофизическая, 18",
+          phone: "+7 (855) 342-53-22",
+          rating: 4.9,
+          hours: "Пн-Вс: 8:00-22:00",
+          image: "img/autocenter2.webp",
+        },
+        {
+          name: "Автосалон + Выкуп, Геофизическая 3",
+          address: "ул. Геофизическая, 3",
+          phone: "+7 (855) 342-53-24",
+          rating: 4.7,
+          hours: "Пн-Вс: 9:00-20:00",
+          image: "img/autocenter3.webp",
+        },
+      ];
+
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function openPhoneModal() {
+        document.getElementById("phoneModal").style.display = "flex";
+      }
+      function closeModals() {
+        document
+          .querySelectorAll(".modal")
+          .forEach((m) => (m.style.display = "none"));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const pointsDiv = document.getElementById("contactsPoints");
+        if (pointsDiv) {
+          pointsDiv.innerHTML = cityPoints
+            .map(
+              (p) => `
+                    <div class="contact-card-horizontal">
+                        <div class="contact-image"><img src="${
+                          p.image || "img/default-placeholder.jpg"
+                        }" alt="${p.name}"></div>
+                        <div class="contact-info">
+                            <h3>${p.name}</h3>
+                            <p>${p.address}</p>
+                            <p>${p.phone}</p>
+                            <p>${p.hours}</p>
+                            <div class="rating-stars">${"★".repeat(
+                              Math.floor(p.rating)
+                            )} (${p.rating})</div>
+                            <button class="btn" onclick="openPhoneModal()">Связаться</button>
+                        </div>
+                    </div>
+                `
+            )
+            .join("");
+        }
+
+        const mapDiv = document.getElementById("map");
+        if (mapDiv) {
+          mapDiv.innerHTML =
+            '<iframe width="100%" height="400" frameborder="0" style="border:0; border-radius:24px;" src="https://yandex.ru/map-widget/v1/?ll=52.297,54.902&z=13&pt=52.297,54.902,pm2rdm"></iframe>';
+        }
+
+        const burgerBtn = document.getElementById("burgerMenu");
+        const navLinks = document.getElementById("navLinks");
+        if (burgerBtn)
+          burgerBtn.addEventListener("click", () =>
+            navLinks.classList.toggle("active")
+          );
+
+        document.addEventListener("click", (e) => {
+          if (
+            window.innerWidth <= 768 &&
+            navLinks?.classList.contains("active") &&
+            !navLinks.contains(e.target) &&
+            !burgerBtn.contains(e.target)
+          ) {
+            navLinks.classList.remove("active");
+          }
+        });
+
+        document
+          .getElementById("submitPhoneBtn")
+          ?.addEventListener("click", () => {
+            const phone = document.getElementById("phoneInput").value.trim();
+            if (phone && phone.length > 5) {
+              showToast(
+                `Спасибо! Номер ${phone} принят. Специалист свяжется с вами в течение 15 минут.`
+              );
+              closeModals();
+            } else showToast("Введите корректный номер телефона");
+          });
+
+        window.onclick = (e) => {
+          if (e.target.classList.contains("modal")) closeModals();
+        };
+      });
+    </script>
+  </body>
+</html>

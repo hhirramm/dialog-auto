@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta
+      name="description"
+      content="Каталог автомобилей Диалог Авто в Альметьевске. Новые и с пробегом. Фильтрация по цене, марке, состоянию."
+    />
+    <title>Диалог Авто | Каталог автомобилей</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <h1>Диалог Авто</h1>
+            <span>19 лет лидерства в Альметьевске</span>
+          </div>
+          <button class="burger-menu" id="burgerMenu" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="nav-links" id="navLinks">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html" class="active">Каталог авто</a>
+            <a href="service.html">Сервис</a>
+            <a href="contacts.html">Контакты</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="section-title">Каталог автомобилей</div>
+
+      <div class="filter-bar">
+        <div class="filter-group">
+          <button class="filter-btn" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="new">Новые</button>
+          <button class="filter-btn" data-filter="used">С пробегом</button>
+        </div>
+        <select class="sort-select" id="sortSelectCatalog">
+          <option value="default">Сортировка</option>
+          <option value="price-asc">Цена ↑</option>
+          <option value="price-desc">Цена ↓</option>
+          <option value="name-asc">Название А-Я</option>
+        </select>
+      </div>
+
+      <div class="mobile-filters">
+        <select id="mobileFilterSelect" class="mobile-filter-select">
+          <option value="all">Все автомобили</option>
+          <option value="new">Новые</option>
+          <option value="used">С пробегом</option>
+        </select>
+        <select id="mobileBrandSelect" class="mobile-filter-select">
+          <option value="all">Все марки</option>
+          <option value="BMW">BMW</option>
+          <option value="Mercedes">Mercedes</option>
+          <option value="Audi">Audi</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Kia">Kia</option>
+          <option value="Hyundai">Hyundai</option>
+        </select>
+        <select id="mobileSortSelect" class="mobile-filter-select">
+          <option value="default">Сортировка</option>
+          <option value="price-asc">Цена ↑</option>
+          <option value="price-desc">Цена ↓</option>
+          <option value="name-asc">Название А-Я</option>
+        </select>
+      </div>
+
+      <div class="brand-buttons" id="brandFilterContainer"></div>
+      <div class="cards-grid" id="catalogGridFull"></div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          © 2026 Диалог Авто — 19 лет лидерства. Продажа, сервис, выкуп авто в
+          Альметьевске.
+        </p>
+        <p style="margin-top: 12px">
+          г. Альметьевск, ул. Геофизическая 58, 18, 3
+        </p>
+      </div>
+    </footer>
+
+    <div id="phoneModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModals()">&times;</span>
+        <h2>Оставить заявку</h2>
+        <div class="modal-description">
+          Оставьте ваш номер телефона, и наш специалист свяжется с вами в
+          течение 15 минут для консультации.
+        </div>
+        <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__" />
+        <button
+          id="submitPhoneBtn"
+          style="margin-top: 16px; width: 100%; background: #dc2626"
+        >
+          Отправить заявку
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const carsCatalog = [
+        {
+          id: 1,
+          name: "BMW X5",
+          year: 2024,
+          price: 8950000,
+          mileage: 0,
+          condition: "new",
+          brand: "BMW",
+          type: "Новый",
+          image: "img/bmwx5.webp",
+        },
+        {
+          id: 2,
+          name: "BMW X3",
+          year: 2022,
+          price: 5620000,
+          mileage: 12500,
+          condition: "used",
+          brand: "BMW",
+          type: "С пробегом",
+          image: "img/bmwx3.webp",
+        },
+        {
+          id: 3,
+          name: "Mercedes GLE",
+          year: 2024,
+          price: 9680000,
+          mileage: 0,
+          condition: "new",
+          brand: "Mercedes",
+          type: "Новый",
+          image: "img/mercedes_gle.webp",
+        },
+        {
+          id: 4,
+          name: "Mercedes E 300",
+          year: 2021,
+          price: 4780000,
+          mileage: 34000,
+          condition: "used",
+          brand: "Mercedes",
+          type: "С пробегом",
+          image: "img/mercedes_e300.webp",
+        },
+        {
+          id: 5,
+          name: "Audi Q7",
+          year: 2023,
+          price: 7190000,
+          mileage: 5000,
+          condition: "used",
+          brand: "Audi",
+          type: "С пробегом",
+          image: "img/audi_q7.webp",
+        },
+        {
+          id: 6,
+          name: "Audi A6",
+          year: 2024,
+          price: 6450000,
+          mileage: 0,
+          condition: "new",
+          brand: "Audi",
+          type: "Новый",
+          image: "img/audi_a6.webp",
+        },
+        {
+          id: 7,
+          name: "Toyota Camry",
+          year: 2024,
+          price: 3990000,
+          mileage: 0,
+          condition: "new",
+          brand: "Toyota",
+          type: "Новый",
+          image: "img/toyota_camry.png",
+        },
+        {
+          id: 8,
+          name: "Toyota Land Cruiser",
+          year: 2022,
+          price: 8990000,
+          mileage: 28000,
+          condition: "used",
+          brand: "Toyota",
+          type: "С пробегом",
+          image: "img/toyota_landcruiser.webp",
+        },
+        {
+          id: 9,
+          name: "Kia Sportage",
+          year: 2023,
+          price: 2950000,
+          mileage: 0,
+          condition: "new",
+          brand: "Kia",
+          type: "Новый",
+          image: "img/kia_sportage.webp",
+        },
+        {
+          id: 10,
+          name: "Hyundai Santa Fe",
+          year: 2021,
+          price: 3390000,
+          mileage: 41000,
+          condition: "used",
+          brand: "Hyundai",
+          type: "С пробегом",
+          image: "img/hyundai_santafe.webp",
+        },
+      ];
+
+      let currentFilter = "all";
+      let currentBrand = "all";
+      let sortType = "default";
+
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function renderCarCard(car) {
+        return `<div class="car-card animate-fade-up"><div class="card-img"><img src="${
+          car.image || "img/default-car.webp"
+        }" alt="${
+          car.name
+        }"></div><div class="card-content"><span class="badge ${
+          car.condition === "new" ? "badge-new" : "badge-used"
+        }">${car.type}</span><h3>${car.name}</h3><p>${car.year} г, ${
+          car.condition === "new"
+            ? "0 км"
+            : car.mileage.toLocaleString() + " км"
+        }</p><div class="price">${car.price.toLocaleString()} ₽</div><button class="buyoutFromCatalogBtn" onclick="openPhoneModal()">Оставить заявку</button></div></div>`;
+      }
+
+      function renderCatalog() {
+        let filtered = [...carsCatalog];
+        if (currentFilter !== "all")
+          filtered = filtered.filter((car) => car.condition === currentFilter);
+        if (currentBrand !== "all")
+          filtered = filtered.filter((car) => car.brand === currentBrand);
+        if (sortType === "price-asc")
+          filtered.sort((a, b) => a.price - b.price);
+        else if (sortType === "price-desc")
+          filtered.sort((a, b) => b.price - a.price);
+        else if (sortType === "name-asc")
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+        const uniqueBrands = [...new Set(carsCatalog.map((c) => c.brand))];
+        const brandDiv = document.getElementById("brandFilterContainer");
+        if (brandDiv) {
+          brandDiv.innerHTML =
+            `<div class="brand-btn ${
+              currentBrand === "all" ? "active" : ""
+            }" data-brand="all">Все марки</div>` +
+            uniqueBrands
+              .map(
+                (b) =>
+                  `<div class="brand-btn ${
+                    currentBrand === b ? "active" : ""
+                  }" data-brand="${b}">${b}</div>`
+              )
+              .join("");
+        }
+
+        const grid = document.getElementById("catalogGridFull");
+        if (grid) {
+          if (filtered.length === 0)
+            grid.innerHTML =
+              "<p style='padding:40px; text-align:center;'>Автомобилей не найдено</p>";
+          else
+            grid.innerHTML = filtered.map((car) => renderCarCard(car)).join("");
+        }
+
+        document.querySelectorAll(".brand-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            currentBrand = btn.dataset.brand;
+            renderCatalog();
+          });
+        });
+      }
+
+      function openPhoneModal() {
+        document.getElementById("phoneModal").style.display = "flex";
+      }
+      function closeModals() {
+        document
+          .querySelectorAll(".modal")
+          .forEach((m) => (m.style.display = "none"));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderCatalog();
+
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            currentFilter = btn.dataset.filter;
+            renderCatalog();
+          });
+        });
+
+        document
+          .getElementById("sortSelectCatalog")
+          ?.addEventListener("change", (e) => {
+            sortType = e.target.value;
+            renderCatalog();
+          });
+
+        document
+          .getElementById("mobileFilterSelect")
+          ?.addEventListener("change", (e) => {
+            currentFilter = e.target.value;
+            renderCatalog();
+          });
+        document
+          .getElementById("mobileBrandSelect")
+          ?.addEventListener("change", (e) => {
+            currentBrand = e.target.value;
+            renderCatalog();
+          });
+        document
+          .getElementById("mobileSortSelect")
+          ?.addEventListener("change", (e) => {
+            sortType = e.target.value;
+            renderCatalog();
+          });
+
+        const burgerBtn = document.getElementById("burgerMenu");
+        const navLinks = document.getElementById("navLinks");
+        if (burgerBtn)
+          burgerBtn.addEventListener("click", () =>
+            navLinks.classList.toggle("active")
+          );
+
+        document.addEventListener("click", (e) => {
+          if (
+            window.innerWidth <= 768 &&
+            navLinks?.classList.contains("active") &&
+            !navLinks.contains(e.target) &&
+            !burgerBtn.contains(e.target)
+          ) {
+            navLinks.classList.remove("active");
+          }
+        });
+
+        document
+          .getElementById("submitPhoneBtn")
+          ?.addEventListener("click", () => {
+            const phone = document.getElementById("phoneInput").value.trim();
+            if (phone && phone.length > 5) {
+              showToast(
+                `Спасибо! Номер ${phone} принят. Специалист свяжется с вами в течение 15 минут.`
+              );
+              closeModals();
+            } else showToast("Введите корректный номер телефона");
+          });
+
+        window.onclick = (e) => {
+          if (e.target.classList.contains("modal")) closeModals();
+        };
+      });
+    </script>
+  </body>
+</html>

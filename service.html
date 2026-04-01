@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta
+      name="description"
+      content="Сервис и ремонт автомобилей в Альметьевске. Замена масла, шиномонтаж, диагностика, ремонт ходовой части, двигателя и КПП. Запись онлайн."
+    />
+    <title>Диалог Авто | Сервис и ремонт</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <h1>Диалог Авто</h1>
+            <span>19 лет лидерства в Альметьевске</span>
+          </div>
+          <button class="burger-menu" id="burgerMenu" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="nav-links" id="navLinks">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог авто</a>
+            <a href="service.html" class="active">Сервис</a>
+            <a href="contacts.html">Контакты</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="section-title">Сервис и ремонт автомобилей</div>
+
+      <div class="service-banner">
+        <div
+          class="service-banner-bg"
+          style="background-image: url('img/service.png')"
+        ></div>
+        <div class="service-banner-content">
+          <p>
+            Гарантийное и постгарантийное обслуживание авто различных марок в
+            авторизованном сервисном центре "Диалог Авто". Предлагаем полный
+            комплекс работ: от планового ТО и замены расходников до сложного
+            ремонта.
+          </p>
+          <button class="btn-red" id="openServiceModalBtn">
+            Записаться на сервис
+          </button>
+        </div>
+      </div>
+
+      <div
+        style="
+          background: white;
+          border-radius: 24px;
+          padding: 28px;
+          margin: 20px 0;
+        "
+      >
+        <h3>Наши услуги</h3>
+        <ul style="margin-top: 16px; list-style: none">
+          <li style="margin: 12px 0">✓ Замена масла и фильтров</li>
+          <li style="margin: 12px 0">✓ Шиномонтаж и балансировка</li>
+          <li style="margin: 12px 0">✓ Компьютерная диагностика</li>
+          <li style="margin: 12px 0">✓ Ремонт ходовой части</li>
+          <li style="margin: 12px 0">✓ Ремонт двигателя и КПП</li>
+        </ul>
+      </div>
+
+      <div style="background: white; border-radius: 24px; padding: 28px">
+        <h3>Обслуживаемые марки</h3>
+        <div
+          style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px"
+        >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >BMW</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Mercedes</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Audi</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Toyota</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Kia</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Hyundai</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Volkswagen</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Volvo</span
+          >
+          <span
+            style="
+              background: #eef2ff;
+              padding: 8px 20px;
+              border-radius: 40px;
+              font-weight: 500;
+            "
+            >Skoda</span
+          >
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          © 2026 Диалог Авто — 19 лет лидерства. Продажа, сервис, выкуп авто в
+          Альметьевске.
+        </p>
+        <p style="margin-top: 12px">
+          г. Альметьевск, ул. Геофизическая 58, 18, 3
+        </p>
+      </div>
+    </footer>
+
+    <div id="serviceModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModals()">&times;</span>
+        <h2>Запись на сервис</h2>
+        <div class="modal-description">
+          Заполните форму, и мы перезвоним вам для подтверждения записи.
+        </div>
+        <input type="text" id="serviceName" placeholder="Ваше имя" />
+        <input type="tel" id="servicePhone" placeholder="Телефон" />
+        <select id="serviceType">
+          <option value="Замена масла и фильтров">
+            Замена масла и фильтров
+          </option>
+          <option value="Шиномонтаж и балансировка">
+            Шиномонтаж и балансировка
+          </option>
+          <option value="Компьютерная диагностика">
+            Компьютерная диагностика
+          </option>
+          <option value="Ремонт ходовой части">Ремонт ходовой части</option>
+          <option value="Ремонт двигателя и КПП">Ремонт двигателя и КПП</option>
+        </select>
+        <select id="serviceLocation">
+          <option value="Автоцентр на Геофизической, 58">
+            Автоцентр на Геофизической, 58
+          </option>
+          <option value="Сервисный центр Геофизическая, 18">
+            Сервисный центр Геофизическая, 18
+          </option>
+          <option value="Автосалон + Выкуп, Геофизическая 3">
+            Автосалон + Выкуп, Геофизическая 3
+          </option>
+        </select>
+        <button
+          id="sendServiceBtn"
+          style="margin-top: 16px; width: 100%; background: #dc2626"
+        >
+          Отправить заявку
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function openServiceModal() {
+        document.getElementById("serviceModal").style.display = "flex";
+      }
+      function closeModals() {
+        document
+          .querySelectorAll(".modal")
+          .forEach((m) => (m.style.display = "none"));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("openServiceModalBtn")
+          ?.addEventListener("click", openServiceModal);
+
+        const burgerBtn = document.getElementById("burgerMenu");
+        const navLinks = document.getElementById("navLinks");
+        if (burgerBtn)
+          burgerBtn.addEventListener("click", () =>
+            navLinks.classList.toggle("active")
+          );
+
+        document.addEventListener("click", (e) => {
+          if (
+            window.innerWidth <= 768 &&
+            navLinks?.classList.contains("active") &&
+            !navLinks.contains(e.target) &&
+            !burgerBtn.contains(e.target)
+          ) {
+            navLinks.classList.remove("active");
+          }
+        });
+
+        document
+          .getElementById("sendServiceBtn")
+          ?.addEventListener("click", () => {
+            const name = document.getElementById("serviceName").value.trim();
+            const phone = document.getElementById("servicePhone").value.trim();
+            const service = document.getElementById("serviceType").value;
+            const location = document.getElementById("serviceLocation").value;
+            if (name && phone && phone.length > 5) {
+              showToast(
+                `Заявка на сервис (${service}) в ${location} от ${name} отправлена!`
+              );
+              closeModals();
+            } else showToast("Заполните имя и корректный телефон");
+          });
+
+        window.onclick = (e) => {
+          if (e.target.classList.contains("modal")) closeModals();
+        };
+      });
+    </script>
+  </body>
+</html>
